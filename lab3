@@ -1,0 +1,100 @@
+class Farm:
+    def __init__(self, name):
+        self.name = name
+        self.animals = []
+
+    def add_animal(self, animal):
+        self.animals.append(animal)
+
+    def remove_animal(self, animal):
+        self.animals.remove(animal)
+
+
+class Store:
+    def __init__(self):
+        self.eggs_price = 30  
+        self.milk_price = 40 
+        self.bacon_price = 60  
+        self.eggs_quantity = 0  
+        self.milk_quantity = 0 
+        self.bacon_quantity = 0  
+        self.money = 0 
+
+    def sell_eggs(self, quantity):
+        if self.eggs_quantity >= quantity:
+            self.eggs_quantity -= quantity
+            income = quantity * self.eggs_price
+            self.money += income
+            return income
+        else:
+            return 0
+
+    def sell_milk(self, quantity):
+        if self.milk_quantity >= quantity:
+            self.milk_quantity -= quantity
+            income = quantity * self.milk_price
+            self.money += income
+            return income
+        else:
+            return 0
+    
+    def sell_bacon(self, quantity):
+        if self.bacon_quantity >= quantity:
+            self.bacon_quantity -= quantity
+            income = quantity * self.bacon_price
+            self.money += income
+            return income
+        else:
+            return 0
+            
+
+class Animal:
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+        self.fed = False
+    def feed(self):
+        self.fed = True
+        print(" ви нагодували тваринку")
+
+class Chiken (Animal):
+    def __init__(self, name, type):
+        super().__init__(name, type)
+        self.eggs = 0
+    
+    def newegg(self):
+        if self.fed:
+            self.eggs += 1
+            print("курка знесла яйце")
+        else:
+            print("погодуйте курку")
+    
+    def produce(self, store):
+        if self.eggs > 0:
+            store.eggs_quantity += self.eggs
+            self.eggs = 0
+
+class Pig (Animal):
+    def killpig(self):
+        self.bacon +=5
+    
+    def produce(self, store):
+        if self.bacon > 0:
+            store.bacon_quantity += self.bacon
+            self.bacon = 0
+
+class Cow (Animal):
+    def __init__(self, name, type):
+        super().__init__(name, type)
+        self.milk = 0
+    def milking(self):
+        if self.fed:
+            self.milk += 1
+            print("ви подоїли корову")
+        else:
+            print("молока нема. може погодуєте корову?")
+
+    def produce(self, store):
+        if self.milk > 0:
+            store.milk_quantity += self.milk
+            self.milk = 0
