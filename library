@@ -1,0 +1,138 @@
+class Book:
+    def __init__(self, title, author):
+        self.title = title
+        self.author = author
+        self.pages = []
+
+    def add_page(self, page):
+        self.pages.append(page)
+
+    def __str__(self):
+        return f"{self.title} by {self.author}"
+
+
+class BookBuilder:
+    def __init__(self, title, author):
+        self.book = Book(title, author)
+
+    def add_page(self, page):
+        self.book.add_page(page)
+        return self
+
+    def build(self):
+        return self.book
+
+
+class ScientificBookBuilder(BookBuilder):
+    def add_source(self, source):
+        self.book.add_page(f"Source: {source}")
+        return self
+
+
+class NovelBookBuilder(BookBuilder):
+    def add_character(self, character):
+        self.book.add_page(f"Character: {character}")
+        return self
+
+
+class ManualBookBuilder(BookBuilder):
+    def add_image(self, image):
+        self.book.add_page(f"Image: {image}")
+        return self
+
+
+# Створюємо наукову книгу
+scientific_book_builder = ScientificBookBuilder("Розумна Книжка", "Остап")
+scientific_book_builder.add_source("Розумне джерело інфи N1")
+scientific_book_builder.add_source("Розумне джерело інфи N2")
+scientific_book = scientific_book_builder.build()
+
+# Додавання сторінок до книги
+scientific_book.add_page("блаблалала")
+scientific_book.add_page("балалаллалала")
+scientific_book.add_page("баалалалалаллалала")
+scientific_book.add_page("висновок")
+scientific_book_builder.add_source("Розумне джерело інфи N3")
+
+# Виводимо інформацію про книгу та її сторінки
+
+
+
+print("оберіть жанр книги: 1) науковий 2) роман 3) посібник")
+answer = input("оберіть варіант ")
+match answer:
+        case "1": 
+            print(" ви обрали наукову книжку")
+            print("вкажіть назву книги")
+            title = input("оберіть назву ")
+            print("вкажіть автора")
+            author = input("оберіть автора ")
+            scientific_book_builder = ScientificBookBuilder(title, author)
+            scientific_book = scientific_book_builder.build()
+            print("вкажіть ресурси")
+            i = "+"
+            while i != "+":
+                sourses = input("вкажіть ддерело ")
+                scientific_book_builder.add_source(sourses)
+                i = input("бажаєте доати ще? (+/-) ")
+            i = "+"
+            while i != "+":
+                page = input("напишіть сторінку ")
+                scientific_book.add_page(page)
+                i = input("бажаєте доати ще? (+/-) ")
+            print(scientific_book)
+            for i in range(len(scientific_book.pages)):
+                page = scientific_book.pages[i]
+                index = i + 1
+                print(f"Page {index}: {page}")
+        case "2": 
+            print(" ви обрали художню книжку")
+            print("вкажіть назву книги")
+            title = input("оберіть назву ")
+            print("вкажіть автора")
+            author = input("оберіть автора ")
+            novel_book_builder = NovelBookBuilder(title, author)
+            novel_book = novel_book_builder.build()
+            print("вкажіть ресурси")
+            i = "+"
+            while i != "+":
+                character = input("добавте персонажа ")
+                novel_book_builder.add_character(character)
+                i = input("бажаєте доати ще? (+/-) ")
+            i = "+"
+            while i != "+":
+                page = input("напишіть сторінку ")
+                novel_book.add_page(page)
+                i = input("бажаєте доати ще? (+/-) ")
+            print(novel_book)
+            for i in range(len(novel_book.pages)):
+                page = novel_book.pages[i]
+                index = i + 1
+                print(f"Page {index}: {page}")
+        case "3": 
+            print(" ви обрали художню книжку")
+            print("вкажіть назву книги")
+            title = input("оберіть назву ")
+            print("вкажіть автора")
+            author = input("оберіть автора ")
+            manual_book_builder = ManualBookBuilder(title, author)
+            manual_book = manual_book_builder.build()
+            print("вкажіть ресурси")
+            i = "+"
+            while i != "+":
+                img = input("добавте персонажа ")
+                manual_book_builder.add_image(img)
+                i = input("бажаєте доати ще? (+/-) ")
+            i = "+"
+            while i != "+":
+                page = input("напишіть сторінку ")
+                manual_book.add_page(page)
+                i = input("бажаєте доати ще? (+/-) ")
+            print(manual_book)
+            for i in range(len(manual_book.pages)):
+                page = manual_book.pages[i]
+                index = i + 1
+                print(f"Page {index}: {page}")
+
+
+            
