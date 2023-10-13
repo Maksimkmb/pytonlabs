@@ -1,0 +1,54 @@
+guide = {}
+
+visited_events = []
+
+
+def create_event():
+    part_of_event = []
+    part_date = input("Введіть дату події")
+    part_of_event.append(part_date)
+    part_event = input("Введіть подію")
+    part_of_event.append(part_event)
+
+    guide[part_date] = part_event
+    
+
+def delete_event():
+    key_choice = input("Введіть дату для видалення")
+    if key_choice in guide:
+        del guide[key_choice]
+        print("ви успішно змінили реальність")
+    else:
+        print("такої події нема")
+
+def visit():
+    key_choice = input("Введіть дату події: ")
+    if key_choice in guide:
+        x = guide[key_choice]
+        visited_events.append(x)
+    else:
+        print("такої дати немає")
+
+
+while True:
+    print("1) Створити подію")
+    print("2) Відвідати подію")
+    print("3) інформація")
+    print("4) видалити подію")
+    print("5) Вихід")
+    choice = input("Введіть відповідь: ")
+
+    if choice == '1':
+        create_event()
+    elif choice == '2':
+        visit()
+    elif choice == '3':
+        print(guide)
+        print(visited_events)
+    elif choice == '4':
+        delete_event()
+    elif choice == '5':
+        break
+    else:
+        print("введіть щось нормальне")
+    
