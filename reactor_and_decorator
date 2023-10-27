@@ -1,0 +1,34 @@
+import time
+
+
+log = []
+
+def logger(func):
+    def wrapper(*args, **kwargs):
+        current_time = time.strftime('%Y-%m-%d %H:%M:%S')
+        func_name = func.__name__
+        log_entry = f"{current_time} - Викликано функцію {func_name}"
+        log.append(log_entry)
+        result = func(*args, **kwargs)
+        return result
+    return wrapper
+
+
+def log_history():
+    for log_entry in log:
+        yield log_entry
+
+@logger
+def func1(a, b):
+    return a + b
+
+@logger
+def func2(a, b):
+    return a * b
+
+print(func1(7, 8))
+print(func2(10, 5))
+
+
+for log_entry in log_history():
+    print(log_entry)
