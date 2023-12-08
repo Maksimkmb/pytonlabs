@@ -1,0 +1,38 @@
+import random
+
+def shake_ball(responses):
+    return random.choice(responses)
+
+def add_response(responses, new_response, probability):
+    responses["answer"].append(new_response)
+    responses["probability"].append(probability)
+    print("Нова відповідь додана!")
+
+responses = ["Так", "Ні", "Можливо"]
+
+while True:
+    print("\n1. Задати питання")
+    print("2. Додати нову можливу відповідь")
+    print("3. Вийти")
+
+    choice = input("Виберіть опцію: ")
+
+    if choice == "1":
+        question = input("Задайте питання: ")
+        answer = shake_ball(responses)
+        print(f"Кулька каже: {answer}")
+
+    elif choice == "2":
+        new_response = input("Додати нову можливу відповідь: ")
+        probability = float(input("Введіть вірогідність (0-1): "))
+        if 0 <= probability <= 1:
+            add_response(responses, new_response, probability)
+        else:
+            print("Невірна вірогідність. Введіть значення від 0 до 1.")
+
+    elif choice == "3":
+        print("До побачення!")
+        break
+
+    else:
+        print("Невірний вибір. Будь ласка, виберіть знову.")
